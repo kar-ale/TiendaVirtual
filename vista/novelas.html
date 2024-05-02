@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Novelas</title>
+<link rel="stylesheet" href="../asset/css/estilosvista.css">
+<style type="text/css">   
+	body {
+		background-image:url(../asset/imgv/saku.jpg);
+		font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	#inputs {
+		border:5px inset rgb(255, 153, 243);
+		width: 60px;
+		background:rgb(232, 123, 219);
+		text-align : center;
+	}
+	#boton  {
+		background: rgb(255, 153, 243) border:1px outset rgb(100,71,159);
+		width:80px;
+		font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background-color : #FFFACD;
+		color : #70195f;
+	}
+</style>
+<script></script>
+<script type="text/javascript">
+function meterencarro(formu) {
+unidades=formu.numpedido.value;
+descripcion=formu.producto.value;
+if (confirm("Se a añadido el productoa la compra.\n\n " + descripcion)) {
+numeroregistro = 0;  
+numeroregistro = getcookie("numerodeorden");
+numeroregistro++;
+if ( numeroregistro > 5 )
+     alert("ATENCION\nSu carrito esta lleno.\nPor favor, acceda a la hoja de pedido.\nGracias.");
+else {
+actualizarbase = formu.numpedido.value + "|"  + formu.precio.value  + "|" + formu.referencia.value + "|" + formu.producto.value;
+nuevopedido = "Order." + numeroregistro;
+setcookie (nuevopedido, actualizarbase, null, "/");
+setcookie ("numerodeorden", numeroregistro, null, "/");
+
+aviso = "PRODUCTO SELECCIONADO\n\n" + "Cantidad: " + unidades + " unidad/es.\n"
++ "Producto: \n" + descripcion + ".\n\nPulse sobre el Carro para acceder\na su lista de compra.\nGracias";
+alert(aviso);
+}
+}
+}
+
+function getcookieval (offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+  endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function getcookie (name) {
+   var arg = name + "=";
+   var alen = arg.length;
+   var clen = document.cookie.length;
+   var i = 0;
+   while (i < clen)
+        {
+        var j = i + alen;
+        if (document.cookie.substring(i, j) == arg) return getcookieval (j);
+        i = document.cookie.indexOf(" ", i) + 1;
+        if (i == 0) break;
+        }
+   return null;
+}
+
+function setcookie (name,value,expires,path,domain,secure) {
+   document.cookie = name + "=" + escape (value) +
+      ((expires) ? "; expires=" + expires.toGMTString() : "") +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      ((secure) ? "; secure" : "");
+}
+</script>
+</head><body><div>
+<a href="../controlador/welcome.php"><img src="../asset/imgv/usuario.png" width="50"height="50" align="left"></a>
+<!--<a href="formulario.html"><img src="img/registro.webp" width="150"height="60" align="left"></a>-->
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50"height="50" align="right"></a></div>
+<div>
+   <br>
+   <br>
+
+<p align="center"><img src="../asset/imgv/ANILLO.png" width="150" height="150"/><br />
+</p></div>
+<center><table  align="center"  width="1000"border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/rosa2.jpg">
+   <thead>
+      <tr>
+            <th style="padding: 0px 50px;"><a href="educacion.html">LIBROS DE CONOCIMIENTO Y EDUCACIÓN</th > 
+            <th style="padding: 0px 50px;"><a href="comic.html">HISTORIETAS</th>
+              <th style="padding: 0px 50px;"><a href="mangas.html">MANGAS</th > 
+            <th style="padding: 0px 50px;"><a href="Infantil.html">LIBROS INFANTILES</th>
+            <th style="padding: 0px 50px;"><a href="accesorios.html">ACCESORIOS Y MAS</th>
+            </tr>
+   </thead>
+<table style="text-align:center;" width="900" border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/rosa2.jpg">
+<tbody>
+<tr style="font: bold">
+<td width="20" >Imagen </td>
+<td width="100" >Descripcion</td>
+<td width="80" >Precio </td>
+<td width="150" >Comprar</td></tr>
+<tr>
+<td><img src="../asset/imgv/imag1.jpeg" width="200" height="150" border="1" alt="El (des)amor que jamás viví" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">El (des)amor que jamás viví), un poemario que se divide
+    en las distintas fases de una ruptura amorosa:
+    Ira, negación, superación y nuevos comienzos.
+</td>
+<td valign="top"> $200.00 </td>
+<td valign="top">
+  <table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #7d1871;">Cantidad</td></tr>
+<tr><td>
+<form  action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="200.00" name="precio" />
+<input type="hidden" value="El (des)amor que jamás viví" name="producto" /> 
+<input type="hidden" value="ID101" name="referencia" /></center>
+</form>
+</td></tr></table>
+</td></tr>
+<tr>
+<td><img src="../asset/imgv/imag2.jpeg" width="200" height="150" border="1" alt="Coraline" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Coraline es una obra maestra.» Philip Pullman, The GuardianAl día siguiente de mudarse de casa, 
+    Coraline explora las catorce puertas de su nuevo hogar.
+  </td>
+<td valign="top"> $330.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #7d1871;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="330.00" name="precio" />
+<input type="hidden" value="Coraline" name="producto" /> 
+<input type="hidden" value="ID201" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr >
+<td><img src="../asset/imgv/imag3.jpeg" width="200" height="150" border="1" alt="Una vida sin salud Mental" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Una vida sin salud mental es un libro con escritos muy íntimos de la autora. 
+    Trata varias enfermedades mentales como la depresión, la ansiedad no adaptativa.</td>
+<td valign="top"> $360.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td  colspan="3" align="center" style="font: 7pt; color: #7d1871;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="360.00" name="precio" />
+<input type="hidden" value="Una vida sin salud Mental" name="producto" /> 
+<input type="hidden" value="ID33" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="../asset/imgv/imag4.jpeg" width="200" height="150" border="1" alt="La razón de estar contigo." /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">La razón de estar contigo no es tan solo la historia emotiva de las múltiples vidas de un perro, es también 
+    la narración de las relaciones de los humanos vistas desde los ojos de un perro y de los inquebrantables lazos que existen entre el hombre y su mejor amigo.</td>
+<td valign="top"> $300.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color:rgb(180, 59, 152)">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="300.00" name="precio"/>
+<input type="hidden" value="La razón de estar contigo." name="producto" /> 
+<input type="hidden" value="ID402" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+</tbody></table>
+</body>
+</html>

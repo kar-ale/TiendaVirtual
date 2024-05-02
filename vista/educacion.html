@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Conocimiento & Educación</title>
+<link rel="stylesheet" href="../asset/css/estilosvista.css">
+<style type="text/css">   
+	body {
+		background-image:url(../asset/imgv/saku.jpg);
+		font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	#inputs {
+		border:5px inset rgb(255, 153, 243);
+		width: 60px;
+		background:rgb(232, 123, 219);
+		text-align : center;
+	}
+	#boton  {
+		background: rgb(255, 153, 243) border:1px outset rgb(94,71,159);
+		width:80px;
+		font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background-color : #FFFACD;
+		color : #70195f;
+	}
+</style>
+<script></script>
+<script type="text/javascript">
+function meterencarro(formu) {
+unidades=formu.numpedido.value;
+descripcion=formu.producto.value;
+if (confirm("Se a añadido el productoa la compra.\n\n " + descripcion)) {
+numeroregistro = 0;  
+numeroregistro = getcookie("numerodeorden");
+numeroregistro++;
+if ( numeroregistro > 5 )
+     alert("ATENCIÓN\nSu carrito esta lleno.\nPor favor, acceda a la hoja de pedido.\nGracias.");
+else {
+actualizarbase = formu.numpedido.value + "|"  + formu.precio.value  + "|" + formu.referencia.value + "|" + formu.producto.value;
+nuevopedido = "Order." + numeroregistro;
+setcookie (nuevopedido, actualizarbase, null, "/");
+setcookie ("numerodeorden", numeroregistro, null, "/");
+
+aviso = "PRODUCTO SELECCIONADO\n\n" + "Cantidad: " + unidades + " unidad/es.\n"
++ "Producto: \n" + descripcion + ".\n\nPulse sobre el Carro para acceder\na su lista de compra.\nGracias";
+alert(aviso);
+}
+}
+}
+
+function getcookieval (offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+  endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function getcookie (name) {
+   var arg = name + "=";
+   var alen = arg.length;
+   var clen = document.cookie.length;
+   var i = 0;
+   while (i < clen)
+        {
+        var j = i + alen;
+        if (document.cookie.substring(i, j) == arg) return getcookieval (j);
+        i = document.cookie.indexOf(" ", i) + 1;
+        if (i == 0) break;
+        }
+   return null;
+}
+
+function setcookie (name,value,expires,path,domain,secure) {
+   document.cookie = name + "=" + escape (value) +
+      ((expires) ? "; expires=" + expires.toGMTString() : "") +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      ((secure) ? "; secure" : "");
+}
+</script>
+</head><body><div>
+<a href="../controlador/welcome.php"><img src="../asset/imgv/usuario.png" width="50"height="50" align="left"></a>
+<!--<a href="formulario.html"><img src="img/registro.webp" width="150"height="60" align="left"></a>-->
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50"height="50" align="right"></a></div>
+<div>
+   <br>
+   <br>
+   <br>
+
+<p align="center"><strong><img src="../asset/imgv/mate.png" width="150" height="150"/></strong><br />
+</p></div>
+<center><table  align="center"  width="1000"border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/rosa2.jpg">
+   <thead>
+      <tr>
+            <th style="padding: 0px 50px;"><a href="comic.html">HISTORIETAS</th > 
+            <th style="padding: 0px 50px;"><a href="Infantil.html">LIBROS INFANTILES</th>
+              <th style="padding: 0px 50px;"><a href="novelas.html">NOVELAS</th > 
+            <th style="padding: 0px 50px;"><a href="mangas.html">MANGAS</th>
+            <th style="padding: 0px 50px;"><a href="accesorios.html">ACCESORIOS Y MAS</th>
+            </tr>
+   </thead>
+<table style="text-align:center;" width="900" border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/rosa2.jpg">
+<tbody>
+<tr style="font: bold">
+<td width="20" >Imagen </td>
+<td width="100" >Descripcion</td>
+<td width="80" >Precio </td>
+<td width="150" >Comprar</td></tr>
+<tr>
+<td><img src="../asset/imgv/conoc1.jpeg" width="200" height="150" border="1" alt="Álgebra Baldor 4ta Edición" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Esta obra cuenta con gráficos y 6523 ejercicios y problemas con respuestas. 
+   Emplea una metodología innovadora, clara y completa para la comprensión de los temas.
+</td>
+<td valign="top"> $449.00 </td>
+<td valign="top">
+  <table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #70195f">Cantidad</td></tr>
+<tr><td>
+<form  action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="449.00" name="precio" />
+<input type="hidden" value="Álgebra Baldor 4ta Edición" name="producto" /> 
+<input type="hidden" value="ID101" name="referencia" /></center>
+</form>
+</td></tr></table>
+</td></tr>
+<tr>
+<td><img src="../asset/imgv/conoc2.jpeg" width="200" height="150" border="1" alt="Fundamentos de Bases de Datos 6ta Edición" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">En este texto se presentan los conceptos fundamentales de la gestión de las bases de datos, incluyendo aspectos de su diseño, lenguajes e implementación de sistemas. 
+    El libro está orientado a un primer curso de bases de datos para los estudios universitarios de Grado.
+</td>
+<td valign="top"> $1,002.25 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color:#70195f;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="1002.25" name="precio" />
+<input type="hidden" value="Fundamentos de Bases de Datos 6ta Edición" name="producto" /> 
+<input type="hidden" value="ID201" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr >
+<td><img src="../asset/imgv/conoc3.jpeg" width="200" height="150" border="1" alt="Química Orgánica 5ta Edición" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">En Química orgánica los conocimientos referidos a la materia se presentan en siete bloques, cuyos contenidos teóricos están íntimamente relacionados con la vida cotidiana mediante lecturas, laboratorios, 
+    conceptos nuevos, experiencias y ejercicios, con todo ello el estudiante advertirá el grado de comprensión que va obteniendo a lo largo del curso.</td>
+<td valign="top"> $325.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td  colspan="3" align="center" style="font: 7pt; color: #70195f;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="325.00" name="precio" />
+<input type="hidden" value="Química Orgánica 5ta Edición" name="producto" /> 
+<input type="hidden" value="ID33" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="../asset/imgv/conoc4.jpeg" width="200" height="150" border="1" alt="Geografía Conoce tu Mundo y Aprecia su Diversidad" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">En Geografía. Conoce tu mundo y aprecia su diversidad tanto los contenidos teóricos como las actividades 
+    se exponen con un lenguaje apropiado para los estudiantes de cuarto año de preparatoria.</td>
+<td valign="top"> $304.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #70195f;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Agregar" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="../asset/imgv/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="304.00" name="precio" />
+<input type="hidden" value="Geografía Conoce tu Mundo y Aprecia su Diversidad" name="producto" /> 
+<input type="hidden" value="ID402" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+</tbody></table>
+</body>
+</html>
